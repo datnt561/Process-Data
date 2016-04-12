@@ -20,5 +20,13 @@ public class NameDomains {
 	public ArrayList<String> getDomains() {
 		return domains;
 	}
+	public ArrayList<String> getListNameDomain(){
+		ArrayList<String> listNameDomains = new ArrayList<String>();
+			for(String s: domains){
+				s = s.replace(".txt", "");
+				listNameDomains.add(s);
+			}
+		return listNameDomains;
+	}
 
 }

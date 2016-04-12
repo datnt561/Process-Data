@@ -6,23 +6,23 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
 import data.DataNoStopWord;
 import data.Document;
 
 public class DataNumber {
 	DataNoStopWord dataNSWord;
 	ArrayList<Document> dataNumber;
-	public DataNumber(DataNoStopWord dataset){
+
+	public DataNumber(DataNoStopWord dataset) {
 		dataNSWord = dataset;
 		dataNumber = new ArrayList<Document>();
 		Voca voca = new Voca(dataset);
-		for(Document d : dataset.getNewDatasets()){
-			dataNumber.add(new Document(d.getLabel(), replaceWord(d.getReview(),voca)));
+		for (Document d : dataset.getNewDatasets()) {
+			dataNumber.add(new Document(d.getLabel(), replaceWord(d.getReview(), voca)));
 		}
 	}
-	
-	public void writeDataNumber(){
+
+	public void writeDataNumber() {
 		try {
 			File file = new File(dataNSWord.getNameDomain() + ".docs");
 
@@ -42,26 +42,34 @@ public class DataNumber {
 			e.printStackTrace();
 		}
 	}
-	
-	private String replaceWord( String review, Voca voca){
+
+	private String replaceWord(String review, Voca voca) {
 		String[] arrReview = review.split(" ");
 		StringBuffer sb = new StringBuffer();
 		int id;
-		for(String word : arrReview){
+		int i = 0;
+		for (String word : arrReview) {
 			try {
 				id = voca.getIndexWord(word);
-				sb.append(id + " ");
+				if (i == 0){
+					sb.append(id);
+					i++;
+				}
+					
+				else
+					sb.append(" " + id);
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
+
 		}
 		return sb.toString();
-		
+
 	}
-	
-	public void writeReviewNoLable(){
+
+	public void writeReviewNoLable() {
 		try {
 			File file = new File(dataNSWord.getNameDomain() + ".docs");
 
@@ -80,8 +88,7 @@ public class DataNumber {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		
+
 	}
 
 }

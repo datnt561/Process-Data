@@ -1,15 +1,20 @@
 package preprocess;
 
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
 import data.DataNoStopWord;
+import data.Document;
 
 public class Voca {
 	private Hashtable<Integer, String> voca;
@@ -68,19 +73,42 @@ public class Voca {
 		FileWriter writer;
 		try {
 			writer = new FileWriter(nameDomainVoca + ".vocab");
-			Set<Entry<Integer, String>> keys = voca.entrySet();
-			
-			for(Entry<Integer, String> e : keys){
-				writer.write(e.getKey() + ":" + e.getValue());
-				writer.write("\n");
+			List<Integer> ids = new ArrayList<Integer>(voca.keySet());
+			Collections.sort(ids);
+			String review = "";
+			for(Integer i: ids){
+				review += i + ":" + voca.get(i) + "\n";
+				System.out.println(review);
+				
 			}
+			writer.write(review);
 			
-
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+//		try {
+//			File file = new File(nameDomainVoca + ".vocab");
+//
+//			if (!file.exists()) {
+//				file.createNewFile();
+//			}
+//
+//			FileWriter fileWritter = new FileWriter(file.getName(), true);
+//			BufferedWriter bufferedWriter = new BufferedWriter(fileWritter);
+//			Set<Entry<Integer, String>> keys = voca.entrySet();
+//			String voca = "";
+//			for(Entry<Integer, String> e : keys){
+//				
+//				voca += e.getKey() + ":" + e.getValue() + "\n";
+//				//bufferedWriter.write(e.getKey() + ":" + e.getValue() + "\n");
+//			}
+//			bufferedWriter.write(voca);
+//			bufferedWriter.close();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
 	}
 
 }
