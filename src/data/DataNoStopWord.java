@@ -17,6 +17,7 @@ import java.util.Set;
 public class DataNoStopWord extends Data {
 	public DataNoStopWord(String namedomain) {
 		super(namedomain);
+		createDataNStopWord();
 		// TODO Auto-generated constructor stub
 	}
 

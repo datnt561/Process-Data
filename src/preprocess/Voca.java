@@ -13,8 +13,10 @@ import data.DataNoStopWord;
 
 public class Voca {
 	private Hashtable<Integer, String> voca;
+	String nameDomainVoca;
 
 	public Voca(DataNoStopWord d) {
+		nameDomainVoca = d.getNameDomain();
 		voca = new Hashtable<Integer, String>();
 		Set<String> reviews = createVoca(d);
 		for (String s : reviews) {
@@ -61,10 +63,11 @@ public class Voca {
 		return wordInReviews;
 	}
 
-	public void writeVocaToFile(String nameFile) {
+	public void writeVocaToFile() {
+		
 		FileWriter writer;
 		try {
-			writer = new FileWriter(nameFile);
+			writer = new FileWriter(nameDomainVoca + ".vocab");
 			Set<Entry<Integer, String>> keys = voca.entrySet();
 			
 			for(Entry<Integer, String> e : keys){

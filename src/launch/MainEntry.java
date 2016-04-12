@@ -9,21 +9,21 @@ public class MainEntry {
 
 	public static void main(String[] args) {
 		
-		Data dataDomain = new Data("AlarmClock");
+		Data dataDomain = new Data("CableModem");
 		
-		dataDomain.writeDataToFile("AlarmClockBinary.txt");
+		//dataDomain.writeDataToFile("AlarmClockBinary.txt");
 		
-		DataNoStopWord datasetNoStopWord = new DataNoStopWord("AlarmClock");
+		DataNoStopWord datasetNoStopWord = new DataNoStopWord("CableModem");
 		
 		datasetNoStopWord.createDataNStopWord();
 		//datasetNoStopWord.writerDataToFile();
 		Voca voca = new Voca(datasetNoStopWord);
 		
-		voca.writeVocaToFile("AlarmClock.vocab");
+		voca.writeVocaToFile();
 		
 		DataNumber dataNumber = new DataNumber(datasetNoStopWord);
 		
-		dataNumber.writeDataNumber();
+		dataNumber.writeReviewNoLable();
 		
 		
 
