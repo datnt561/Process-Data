@@ -8,6 +8,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Map.Entry;
@@ -19,18 +20,23 @@ public class DataNoStopWord extends Data {
 		// TODO Auto-generated constructor stub
 	}
 
-	private Hashtable<String, ArrayList<String>> newDatasets;
+	private ArrayList<Document> newDatasets;
+
+	public ArrayList<Document> getNewDatasets() {
+		return newDatasets;
+	}
 
 	public void createDataNStopWord() {
-		newDatasets = new Hashtable<String, ArrayList<String>>();
-		ArrayList<String> bagOfWordReview = new ArrayList<String>();
+		newDatasets = new ArrayList<Document>();
 		int i = 0;
-		ArrayList<ArrayList<String>> reviewNStopWord = removeStopWords();
+		ArrayList<String> reviewNStopWord = removeStopWords();
+		String listWordInReview;
 		if (reviewNStopWord.isEmpty()) {
 			System.out.println("ReviewNStopWord is Null");
 		} else {
+
 			for (Document d : data) {
-				newDatasets.put(d.label, reviewNStopWord.get(i));
+				newDatasets.add(new Document(d.label, reviewNStopWord.get(i)));
 				i++;
 			}
 		}
@@ -69,14 +75,10 @@ public class DataNoStopWord extends Data {
 
 			FileWriter fileWritter = new FileWriter(file.getName(), true);
 			BufferedWriter bufferedWriter = new BufferedWriter(fileWritter);
-			Set<Entry<String, ArrayList<String>>> documents = newDatasets.entrySet();
-			String review;
-			for (Entry<String, ArrayList<String>> e : documents) {
-				review = "";
-				for(String s : e.getValue()){
-					review += s + " ";
-				}
-				bufferedWriter.write(e.getKey() + "," + review + "\n");
+
+			for (Document d : newDatasets) {
+
+				bufferedWriter.write(d.getLabel() + "," + d.getReview() + "\n");
 			}
 			bufferedWriter.close();
 		} catch (IOException e) {
@@ -84,29 +86,32 @@ public class DataNoStopWord extends Data {
 		}
 	}
 
-	public ArrayList<ArrayList<String>> removeStopWords() {
+	public ArrayList<String> removeStopWords() {
 		ArrayList<String> stopWords = readFileStopWords("stopwords");
 		ArrayList<String> reviews = super.getReviews();
-		ArrayList<ArrayList<String>> reviewsNoStopWord = new ArrayList<ArrayList<String>>();
+		ArrayList<String> reviewsNoStopWord = new ArrayList<String>();
 		ArrayList<String> words;
-
+		String reviewWord;
 		for (String s : reviews) {
+			reviewWord = "";
 			words = Util.Utility.splitReviewtoWords(s);
 			words.removeAll(stopWords);
+			for (String s1 : words) {
+				reviewWord += s1 + " ";
+			}
 
-			reviewsNoStopWord.add(words);
+			reviewsNoStopWord.add(reviewWord);
 		}
 
 		return reviewsNoStopWord;
 	}
 
-	// public ArrayList<String> getReviews() {
-	// ArrayList<String> wordReviews = new ArrayList<String>();
-	// for (Document d : newDatasets) {
-	// wordReviews.add(d.review);
-	// }
-	//
-	// return wordReviews;
-	// }
+	public ArrayList<String> getReviewsNewDatasets() {
+		ArrayList<String> reviewsNewData = new ArrayList<String>();
+		for (Document d : newDatasets) {
+			reviewsNewData.add(d.review);
+		}
+		return reviewsNewData;
+	}
 
 }

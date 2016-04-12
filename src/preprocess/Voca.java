@@ -21,6 +21,20 @@ public class Voca {
 			addWord(s);
 		}
 	}
+	
+	public int getIndexWord(String word) throws Exception{
+		Set<Entry<Integer, String>> listWord = voca.entrySet();
+		for(Entry<Integer, String> e : listWord){
+			if(e.getValue().equals(word))
+				return e.getKey();
+		}
+		System.out.println("Error");
+		throw new Exception();
+		
+	}
+	public Set<Entry<Integer, String>> entrySet(){
+		return voca.entrySet();
+	}
 
 	public void addWord(String word) {
 		if (!voca.contains(word)) {
@@ -35,7 +49,7 @@ public class Voca {
 	}
 
 	public Set<String> createVoca(DataNoStopWord d) {
-		ArrayList<String> reviews = d.getReviews();
+		ArrayList<String> reviews = d.getReviewsNewDatasets();
 
 		Set<String> wordInReviews = new HashSet<String>();
 		String[] words;
