@@ -18,7 +18,7 @@ public class DataNumber {
 		dataNumber = new ArrayList<Document>();
 		Voca voca = new Voca(dataset);
 		for (Document d : dataset.getNewDatasets()) {
-			dataNumber.add(new Document(d.getLabel(), replaceWord(d.getReview(), voca)));
+			dataNumber.add(new Document(d.getLabel(), replaceWord(d.getReview().trim(), voca)));
 		}
 	}
 
@@ -47,25 +47,29 @@ public class DataNumber {
 		String[] arrReview = review.split(" ");
 		StringBuffer sb = new StringBuffer();
 		int id;
+		String s;
 		int i = 0;
 		for (String word : arrReview) {
-			try {
-				id = voca.getIndexWord(word);
-				if (i == 0){
-					sb.append(id);
-					i++;
-				}
+			if(!word.isEmpty()){
+				try {
+					id = voca.getIndexWord(word);
+					if (i == 0){
+						sb.append(id);
+						i++;
+					}
+						
+					else
+						sb.append(" " + id);
 					
-				else
-					sb.append(" " + id);
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
+			
 
 		}
-		return sb.toString();
+		return sb.toString().trim();
 
 	}
 

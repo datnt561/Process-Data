@@ -8,10 +8,9 @@ import data.NameDomains;
 import preprocess.DataNumber;
 import preprocess.Voca;
 
-public class MainEntry {
+public class NewTest {
 
 	public static void main(String[] args) {
-		
 		NameDomains namedomain = new NameDomains("ACL2015-Chen-Datasets");
 		ArrayList<String> listDomain = namedomain.getListNameDomain();
 		for(String s : listDomain){
@@ -27,8 +26,6 @@ public class MainEntry {
 			
 			dataNumber.writeReviewNoLable();
 		}
-		
-		
 		
 
 	}

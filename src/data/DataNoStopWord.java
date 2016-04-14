@@ -68,7 +68,7 @@ public class DataNoStopWord extends Data {
 
 	public void writerDataToFile() {
 		try {
-			File file = new File(super.getNameDomain() + ".docs");
+			File file = new File("word" + super.getNameDomain() + ".docs");
 
 			if (!file.exists()) {
 				file.createNewFile();
@@ -110,7 +110,7 @@ public class DataNoStopWord extends Data {
 	public ArrayList<String> getReviewsNewDatasets() {
 		ArrayList<String> reviewsNewData = new ArrayList<String>();
 		for (Document d : newDatasets) {
-			reviewsNewData.add(d.review);
+			reviewsNewData.add(d.review.trim());
 		}
 		return reviewsNewData;
 	}

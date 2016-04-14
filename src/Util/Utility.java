@@ -22,6 +22,7 @@ public class Utility {
 	}
 
 	public static ArrayList<String> splitReviewtoWords(String review) {
+		review = review.trim();
 		ArrayList<String> words = new ArrayList<String>();
 		ArrayList<Integer> special = new ArrayList<Integer>();
 		for (int i = 0; i < review.length(); i++)
@@ -29,6 +30,7 @@ public class Utility {
 					|| (review.charAt(i) >= 97 && review.charAt(i) <= 122))) {
 				special.add(i);
 			}
+		special.add(review.length());
 		int temp = 0;
 		String word;
 		for (int i : special) {

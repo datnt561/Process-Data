@@ -25,21 +25,25 @@ public class Voca {
 		voca = new Hashtable<Integer, String>();
 		Set<String> reviews = createVoca(d);
 		for (String s : reviews) {
-			addWord(s);
+			if (!s.isEmpty())
+				addWord(s);
 		}
 	}
-	
-	public int getIndexWord(String word) throws Exception{
+
+	public int getIndexWord(String word) throws Exception {
 		Set<Entry<Integer, String>> listWord = voca.entrySet();
-		for(Entry<Integer, String> e : listWord){
-			if(e.getValue().equals(word))
+		System.out.println(listWord.toString());
+		for (Entry<Integer, String> e : listWord) {
+			System.out.println(e.getValue());
+			if (e.getValue().equals(word))
 				return e.getKey();
 		}
-		System.out.println("Error");
+		System.out.println("Error" + word + "sd");
 		throw new Exception();
-		
+
 	}
-	public Set<Entry<Integer, String>> entrySet(){
+
+	public Set<Entry<Integer, String>> entrySet() {
 		return voca.entrySet();
 	}
 
@@ -69,46 +73,46 @@ public class Voca {
 	}
 
 	public void writeVocaToFile() {
-		
+
 		FileWriter writer;
 		try {
 			writer = new FileWriter(nameDomainVoca + ".vocab");
 			List<Integer> ids = new ArrayList<Integer>(voca.keySet());
 			Collections.sort(ids);
 			String review = "";
-			for(Integer i: ids){
+			for (Integer i : ids) {
 				review += i + ":" + voca.get(i) + "\n";
 				System.out.println(review);
-				
+
 			}
 			writer.write(review);
-			
+
 			writer.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-//		try {
-//			File file = new File(nameDomainVoca + ".vocab");
-//
-//			if (!file.exists()) {
-//				file.createNewFile();
-//			}
-//
-//			FileWriter fileWritter = new FileWriter(file.getName(), true);
-//			BufferedWriter bufferedWriter = new BufferedWriter(fileWritter);
-//			Set<Entry<Integer, String>> keys = voca.entrySet();
-//			String voca = "";
-//			for(Entry<Integer, String> e : keys){
-//				
-//				voca += e.getKey() + ":" + e.getValue() + "\n";
-//				//bufferedWriter.write(e.getKey() + ":" + e.getValue() + "\n");
-//			}
-//			bufferedWriter.write(voca);
-//			bufferedWriter.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
+		// try {
+		// File file = new File(nameDomainVoca + ".vocab");
+		//
+		// if (!file.exists()) {
+		// file.createNewFile();
+		// }
+		//
+		// FileWriter fileWritter = new FileWriter(file.getName(), true);
+		// BufferedWriter bufferedWriter = new BufferedWriter(fileWritter);
+		// Set<Entry<Integer, String>> keys = voca.entrySet();
+		// String voca = "";
+		// for(Entry<Integer, String> e : keys){
+		//
+		// voca += e.getKey() + ":" + e.getValue() + "\n";
+		// //bufferedWriter.write(e.getKey() + ":" + e.getValue() + "\n");
+		// }
+		// bufferedWriter.write(voca);
+		// bufferedWriter.close();
+		// } catch (IOException e) {
+		// e.printStackTrace();
+		// }
 	}
 
 }
