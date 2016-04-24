@@ -85,4 +85,28 @@ public class Utility {
 		
 		return result;
 	}
+	public static void writerDataToARFF(ArrayList<String> listWords, ArrayList<String> vocab, String nameFile) {
+
+		FileWriter writer;
+		try {
+			writer = new FileWriter(nameFile + ".arff");
+			writer.write("@relation " + nameFile + "\n");
+			writer.write("\n");
+			for(String w : vocab){
+				writer.write("@attribute " + w + " {0,1}\n" );
+			}
+			writer.write("\n");
+			writer.write("@data\n" );
+			writer.write("\n");
+			for (String str : listWords) {
+				writer.write(str + "\n");
+				
+			}
+			writer.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	} 
 }

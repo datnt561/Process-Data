@@ -58,7 +58,14 @@ public class Voca {
 			return 0;
 		return voca.size();
 	}
-
+	
+	public ArrayList<String> getWordInVoca(){
+		ArrayList<String> wordInVoca = new ArrayList<String>();
+		for(Entry<Integer, String> e : voca.entrySet()){
+			wordInVoca.add(e.getValue());
+		}
+		return wordInVoca;
+	}
 	public Set<String> createVoca(DataNoStopWord d) {
 		ArrayList<String> reviews = d.getReviewsNewDatasets();
 

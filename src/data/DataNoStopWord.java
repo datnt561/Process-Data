@@ -114,5 +114,11 @@ public class DataNoStopWord extends Data {
 		}
 		return reviewsNewData;
 	}
-
+	public ArrayList<String> getLables() {
+		ArrayList<String> lables = new ArrayList<String>();
+		for (Document d : newDatasets) {
+			lables.add(d.getLabel());
+		}
+		return lables;
+	}
 }

@@ -23,9 +23,9 @@ public class NewMainEntry {
 			Voca voca = new Voca(datasetNoStopWord);
 			voca.writeVocaToFile();
 			
-			DataNumber dataNumber = new DataNumber(datasetNoStopWord);
-			
-			dataNumber.writeReviewNoLable();
+//			DataNumber dataNumber = new DataNumber(datasetNoStopWord);
+//			
+//			dataNumber.writeReviewNoLable();
 		}
 		
 		
